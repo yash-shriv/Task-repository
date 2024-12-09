@@ -1,0 +1,79 @@
+# task>spma_project>spma_app>templates>spma_app>home.html
+__
+C:\Users\shriv\Django\task> django-admin --version
+C:\Users\shriv\Django\task> django-admin startproject spma_project
+C:\Users\shriv\Django\task> cd spma_project
+C:\Users\shriv\Django\task\spma_project> python manage.py startapp spma_app
+C:\Users\shriv\Django\task\spma_project> python manage.py runserver
+C:\Users\shriv\Django\task\spma_project> pip install psutil
+
+For venv,
+C:\Users\shriv\Django\task\spma_project>where python
+C:\Users\shriv\Django\task\spma_project>python -m venv venv
+C:\Users\shriv\Django\task\spma_project>.\venv\Scripts\activate
+__
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Process Monitoring Application</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>System Process Monitoring Application</h1>
+
+    <!-- Search Form -->
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Search by PID or Name" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <button onclick="window.location.reload();">Refresh</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th><a href="?sort=pid&q={{ query }}">PID</a></th>
+                <th><a href="?sort=name&q={{ query }}">Name</a></th>
+                <th><a href="?sort=cpu_percent&q={{ query }}">CPU Usage (%)</a></th>
+                <th><a href="?sort=memory_percent&q={{ query }}">Memory Usage (%)</a></th>
+                <th>Start Time</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for process in processes %}
+                <tr>
+                    <td>{{ process.pid }}</td>
+                    <td>{{ process.name }}</td>
+                    <td>{{ process.cpu_percent }}</td>
+                    <td>{{ process.memory_percent }}</td>
+                    <td>{{ process.create_time }}</td>
+                    <td>{{ process.username }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No processes found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+__
