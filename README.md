@@ -1,6 +1,7 @@
 > System Process Monitoring Application
 
 Objective: This is a Django-based web application to monitor and display all running programs and processes on the current system.
+
 The application includes a backend for fetching process details and a user-friendly frontend for visualization.
 
 > Features:
